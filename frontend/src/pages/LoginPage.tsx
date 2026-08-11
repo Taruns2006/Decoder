@@ -21,7 +21,11 @@ const LoginPage: React.FC = () => {
       navigate('/dashboard');
     } catch (err: any) {
       console.error(err);
-      setError(err.response?.data?.detail || 'Incorrect email or password. Please try again.');
+      if (err.code === 'ERR_NETWORK' || err.message === 'Network Error') {
+        setError('Cannot connect to the backend server. Please verify the backend is running.');
+      } else {
+        setError(err.response?.data?.detail || 'Incorrect email or password. Please try again.');
+      }
     } finally {
       setSubmitting(false);
     }

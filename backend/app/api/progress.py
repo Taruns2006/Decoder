@@ -4,7 +4,7 @@ from typing import List, Dict, Any
 from datetime import datetime, date, timedelta
 from app.core.database import get_db
 from app.models.db_models import (
-    Profile, Subject, Topic, StudentTopic, StudySession, QuizAttempt
+    Profile, Subject, Topic, StudentTopic, StudySession, QuizAttempt, Syllabus, SyllabusUnit
 )
 from app.api.deps import get_current_profile
 

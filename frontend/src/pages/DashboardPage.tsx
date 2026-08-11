@@ -62,8 +62,8 @@ const DashboardPage: React.FC = () => {
   // Derived Data
   const gap = progressData?.detected_gaps?.[0];
   const todaySessions = plannerData?.filter((s: any) => new Date(s.scheduled_for).toDateString() === new Date().toDateString());
-  const roadmap = careerData?.roadmap || [];
-  const nextSkill = roadmap.find((r: any) => r.status !== 'completed');
+  const roadmapSteps = careerData?.steps || [];
+  const nextSkill = roadmapSteps.find((r: any) => r.status !== 'completed');
 
   return (
     <div className="space-y-8 max-w-6xl mx-auto pb-12">
@@ -206,7 +206,7 @@ const DashboardPage: React.FC = () => {
                 <div className="bg-slate-800/50 border border-slate-700/50 p-3 rounded-lg">
                   <p className="text-xs text-slate-400 mb-1">Recommended next skill:</p>
                   <p className="text-sm font-semibold text-white flex justify-between items-center">
-                    {nextSkill.skill_name}
+                    {nextSkill.title}
                     <Link to="/dashboard/roadmap" className="text-xs text-brand-teal hover:text-white transition-colors">
                       View roadmap →
                     </Link>

@@ -41,8 +41,20 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   return <>{children}</>;
 };
 
+interface NavItem {
+  name: string;
+  path: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  exact?: boolean;
+}
+
+interface NavGroup {
+  category: string;
+  items: NavItem[];
+}
+
 // Navigation Architecture
-const navGroups = [
+const navGroups: NavGroup[] = [
   {
     category: 'Home',
     items: [
@@ -156,7 +168,7 @@ const DashboardLayout: React.FC = () => {
             </div>
             <div className="min-w-0">
               <p className="text-xs font-semibold text-white truncate">{user.name}</p>
-              {user.streak > 0 && (
+              {(user.streak ?? 0) > 0 && (
                 <p className="text-[10px] text-orange-400 flex items-center gap-1 mt-0.5">
                   <Flame size={10} /> {user.streak} day streak
                 </p>
@@ -200,9 +212,9 @@ const DashboardLayout: React.FC = () => {
           <span className="text-sm font-bold text-white">Atlantis</span>
         </div>
         <div className="flex items-center gap-3">
-          {user?.streak > 0 && (
+          {(user?.streak ?? 0) > 0 && (
             <span className="text-xs text-orange-400 font-semibold flex items-center gap-1">
-              <Flame size={14} /> {user.streak}
+              <Flame size={14} /> {user?.streak}
             </span>
           )}
           <button onClick={() => setMobileOpen(!mobileOpen)} className="text-slate-400 hover:text-white transition-colors p-1">
@@ -225,7 +237,7 @@ const DashboardLayout: React.FC = () => {
 
           {user && (
             <div className="flex items-center gap-5">
-              {user.streak > 0 && (
+              {(user.streak ?? 0) > 0 && (
                 <div className="flex items-center gap-1.5 text-orange-400 font-medium text-sm bg-orange-400/10 px-3 py-1.5 rounded-full">
                   <Flame size={14} />
                   <span>{user.streak} day streak</span>
